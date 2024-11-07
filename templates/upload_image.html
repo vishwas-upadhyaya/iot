@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Image</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Gradient Background */
+        body {
+            background: linear-gradient(135deg, #1d2671, #c33764);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* Creative Form Container */
+        .form-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            color: #ffffff;
+        }
+
+        .form-container:hover {
+            transform: scale(1.05);
+        }
+
+        /* Animated Title */
+        h2 {
+            font-weight: bold;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+
+        /* Button Styling */
+        .btn-upload {
+            background: #ff416c;
+            background: linear-gradient(45deg, #ff4b2b, #ff416c);
+            border: none;
+            color: #fff;
+            font-weight: bold;
+            border-radius: 50px;
+            padding: 10px 30px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+            transition: 0.3s ease;
+        }
+
+        .btn-upload:hover {
+            box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px);
+        }
+
+        /* Animated Icon */
+        .upload-icon {
+            font-size: 4rem;
+            color: #ff4b2b;
+            animation: bounce 1s infinite;
+        }
+
+        /* Uploaded Content Styling */
+        .uploaded-content img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease;
+        }
+
+        .uploaded-content audio {
+            margin-top: 15px;
+            width: 100%;
+            animation: fadeInUp 1s ease;
+        }
+
+        /* Keyframes for Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+    <h2>Upload Your Image</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-upload mt-3">Upload</button>
+    </form>
+
+    {% if audio %}
+    <div class="uploaded-content mt-4">
+        <h3 class="text-white">Uploaded Content:</h3>
+<!--        <img src="{{ uploaded_file_url }}" alt="Uploaded Image">-->
+        <audio controls id="player" class="mt-3">
+            <p></p>
+            <source src="{{ audio }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Bootstrap and FontAwesome JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
