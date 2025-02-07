@@ -23,7 +23,7 @@ environ.Env.read_env()
 # aws_access_key_id = os.environ.get("AWS_ACCESS_KEY_ID")
 # aws_secret_access_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
 # region_name = os.environ.get("AWS_REGION_S3")
-bucket_name = "elasticbeanstalk-ap-south-1-221082173687"
+bucket_name = "imagetopic"
 s3_client = boto3.client(
     's3',
     aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
