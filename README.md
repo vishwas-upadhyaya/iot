@@ -1,36 +1,27 @@
-# iot
+# IoT Audio/Visual Processing App
 
 ## Project Overview
-A Django-based web application with functionalities related to Internet of Things (IoT), audio processing, and machine learning.
+This project is a Django-based web application focused on processing audio and visual inputs. It provides functionalities such as extracting text from images (OCR), summarizing or generating text based on extracted content, and converting the resulting text back to speech. It integrates cloud services for storage and advanced ML APIs for natural language processing.
 
-## What is this Project?
-This repository contains a comprehensive web backend that seems to serve as a hub or dashboard for IoT devices, or an application handling multimedia (audio, images) and specific machine learning subtopics.
-
-## How it was done
-The project uses the Django web framework (`manage.py`, `db.sqlite3`). It manages static and media files (`audio/`, `media/`, `uploaded_images/`) and includes an app (`mlsubtopic/`) likely dedicated to processing or displaying machine learning results. Dependencies are listed in `requirements.txt`.
-
-## Why it was done
-To create a versatile web platform capable of handling multimedia uploads and integrating machine learning workflows, potentially interacting with IoT sensor data or audio streams.
+## Deep Technical Details (Architecture, Pipeline)
+- **Architecture:** 
+  - A Django web framework backend managing the application flow, routing, and database models.
+  - Django Views handle image uploads and trigger the ML pipeline.
+- **Data Pipeline & Processing:** 
+  - **OCR (Optical Character Recognition):** Uses `easyocr` to extract text from user-uploaded images.
+  - **Natural Language Processing:** Integrates with the `cohere` API to process and summarize the extracted text.
+  - **Text-to-Speech (TTS):** The processed text is converted into audio using Google Text-to-Speech (`gTTS`).
+  - **Cloud Integration:** Uses `boto3` for handling file storage on AWS S3, facilitating the storage and retrieval of audio files.
+  - **Speech-to-Text:** Whisper (OpenAI) support is included for transcribing audio to text.
 
 ## Tech Stack
-- Python
-- Django (Web Framework)
-- SQLite (Database)
-
-## Key Features
-- Handling and storage of uploaded media (audio files, images).
-- Integration of a dedicated app for machine learning logic (`mlsubtopic`).
-- Structured backend for building APIs or dashboards for IoT data.
-
-## File Structure
-- `manage.py`: Django entry point script.
-- `mlsubtopic/`: A Django app handling specific core logic.
-- `templates/`: HTML templates for the application interface.
-- `audio/`, `media/`, `uploaded_images/`: Directories for handling static and user-uploaded content.
-- `requirements.txt`: Project dependencies.
-
-## Local Setup (if applicable)
-1. Clone the repository.
-2. Create a virtual environment and install dependencies: `pip install -r requirements.txt`.
-3. Apply database migrations: `python manage.py migrate`.
-4. Start the Django development server: `python manage.py runserver`.
+- **Framework:** Django
+- **Machine Learning & APIs:** 
+  - `easyocr` (for image-to-text)
+  - `cohere` (for text generation and summarization)
+  - `gTTS` (Google Text-to-Speech)
+  - `openai-whisper` (for speech-to-text)
+- **Cloud & Utilities:**
+  - `boto3` (AWS SDK for Python)
+  - `environ` (for environment variable management)
+  - PyTorch / Transformers (underlying ML framework dependencies)
